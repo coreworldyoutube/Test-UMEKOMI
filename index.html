@@ -16,7 +16,7 @@
     <p>リンクを入力して、埋め込むプロジェクトを表示してください。</p>
 
     <label for="urlInput">URLを入力:</label>
-    <input type="text" id="urlInput" placeholder="埋め込みURLを入力">
+    <input type="text" id="urlInput" placeholder="ScratchプロジェクトのURLを入力">
     <button onclick="embedLink()">埋め込む</button>
 
     <div id="embedContainer"></div>
@@ -26,11 +26,14 @@
             const url = document.getElementById('urlInput').value;
             const embedContainer = document.getElementById('embedContainer');
             
-            // 入力されたURLが空でないか確認
+            // URLが空でないかチェック
             if (url.trim() !== "") {
+                // 入力されたURLが末尾に「/」を含んでいる場合、それを取り除いて「/embed」を追加
+                let embedUrl = url.replace(/\/$/, '') + '/embed';
+                
                 // 新しいiframeを作成
                 const iframe = document.createElement('iframe');
-                iframe.src = url;
+                iframe.src = embedUrl;
                 iframe.allowtransparency = true;
                 iframe.width = "485";
                 iframe.height = "402";
