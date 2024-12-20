@@ -4,12 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>埋め込み動画のサンプル</title>
+    <style>
+        iframe {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>埋め込み動画のサンプル</h1>
-    <p>以下はYouTubeの動画を埋め込んだ例です。</p>
+    <p>リンクを入力して、埋め込むプロジェクトを表示してください。</p>
 
-    <iframe src="https://scratch.mit.edu/projects/1112964419/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    <label for="urlInput">URLを入力:</label>
+    <input type="text" id="urlInput" placeholder="埋め込みURLを入力">
+    <button onclick="embedLink()">埋め込む</button>
+
+    <div id="embedContainer"></div>
+
+    <script>
+        function embedLink() {
+            const url = document.getElementById('urlInput').value;
+            const embedContainer = document.getElementById('embedContainer');
+            
+            // 入力されたURLが空でないか確認
+            if (url.trim() !== "") {
+                // 新しいiframeを作成
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.allowtransparency = true;
+                iframe.width = "485";
+                iframe.height = "402";
+                iframe.frameborder = "0";
+                iframe.scrolling = "no";
+                iframe.allowfullscreen = true;
+                
+                // 既存のiframeを削除して新しいiframeを追加
+                embedContainer.innerHTML = "";
+                embedContainer.appendChild(iframe);
+            } else {
+                alert("URLを入力してください！");
+            }
+        }
+    </script>
 
 </body>
 </html>
